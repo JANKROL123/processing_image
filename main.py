@@ -36,6 +36,7 @@ for image in os.listdir(IMAGE_DIR):
     image_path = os.path.join(IMAGE_DIR, image)
     normalized_image = normalize_image(image_path)
     binary_image = threshold_image(normalized_image)
+    image_open_closed = morfological(binary_image)
     output_image_path = os.path.join(OUTPUT_IMAGE_DIR, image)
-    cv2.imwrite(output_image_path, binary_image)
+    cv2.imwrite(output_image_path, image_open_closed)
     print(f"Processed image saved in {output_image_path}")
