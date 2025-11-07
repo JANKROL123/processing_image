@@ -25,6 +25,11 @@ def threshold_image(img):
     _, binary = cv2.threshold(img, args.threshold, 255, cv2.THRESH_BINARY)
     return binary
 
+def morfological(img):
+    kernel = cv2.getStructuringElement(cv2.MORPH_ELLIPSE, (5,5))
+    opened_img = cv2.morphologyEx(img, cv2.MORPH_OPEN, kernel)
+    closed_img = cv2.morphologyEx(opened_img, cv2.MORPH_CLOSE, kernel)
+    return closed_img
 
 os.makedirs(OUTPUT_IMAGE_DIR, exist_ok=True)
 for image in os.listdir(IMAGE_DIR):
